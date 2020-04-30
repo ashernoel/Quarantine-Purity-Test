@@ -1,10 +1,20 @@
 import React from 'react';
+import logo from './covidlogo.png';
+import share from './icons8-people-96.png';
+import retry from './icons8-synchronize-96.png';
 
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from '@material-ui/core/Button';
+import Link from "@material-ui/core/Link";
+
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import ReplayIcon from '@material-ui/icons/Replay';
+
+
+
 
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -16,6 +26,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
+
+
 
 class Test extends React.Component {
     
@@ -56,6 +68,27 @@ class Test extends React.Component {
       console.log('I was triggered during render')      
   }
 
+  iosCopyToClipboard(el) {
+    var oldContentEditable = el.contentEditable,
+        oldReadOnly = el.readOnly,
+        range = document.createRange();
+
+    el.contentEditable = true;
+    el.readOnly = false;
+    range.selectNodeContents(el);
+
+    var s = window.getSelection();
+    s.removeAllRanges();
+    s.addRange(range);
+
+    el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+
+    el.contentEditable = oldContentEditable;
+    el.readOnly = oldReadOnly;
+
+    document.execCommand('copy');
+}
+
 
   render() {
     const {start, end} = this.state;
@@ -69,6 +102,10 @@ class Test extends React.Component {
             
             <Paper style={{ padding: 14, width: "100%", maxWidth: 600, margin: "12px auto" }}>
             
+            <br>
+            </br>
+            <img src={logo} className="App-logo" alt="logo" />
+
             <Typography variant="h4" align="center">
               <div class="htext">
                 Quarantine Purity Test
@@ -78,7 +115,7 @@ class Test extends React.Component {
             <Typography variant="body1" gutterBottom>
                 <div class="btext">
                 <br></br>
-                  The official not-a-bucket-list of the COVID-19 crisis. 
+                  The official anti-bucket-list of the COVID-19 crisis. 
                   <br></br>
                 </div>
               </Typography>
@@ -125,7 +162,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="11. Clicked “Ignore Limit” for screen time at least once
+                    label="11. Clicked “Ignore Limit” on screen time at least once
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
@@ -230,7 +267,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="37. Did not do wear real pants for over a week
+                    label="37. Did not wear real pants for over a week
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
@@ -321,7 +358,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="60. Played 500+ games of League of Legends during quarantine 
+                    label="60. Played 300+ games of League of Legends during quarantine 
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
@@ -405,7 +442,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="82. Thanked Tim Cook that FaceTime is secure during a call
+                    label="82. Had reason to thank Tim Cook that FaceTime is secure
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
@@ -433,7 +470,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="89. Accepted a strange Instagram DM solicitation
+                    label="89. Accepted a sugar daddy/momma DM solicitation
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
@@ -461,7 +498,7 @@ class Test extends React.Component {
                     "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
-                    label="96. Corona-conception                    "
+                    label="96. Corona-conceived                    "
                 labelPlacement="end"/></ListItem>
                 <ListItem dense button><FormControlLabel value="end" control={<Checkbox onChange={this.adjustScore} color="primary"/>}
                     label="97. Abused Pornhub premium                    "
@@ -505,7 +542,12 @@ class Test extends React.Component {
           <Box m={1}>
             
             <Paper style={{ padding: 14, width: "100%", maxWidth: 600, margin: "12px auto" }}>
-            
+
+            <br>
+            </br>
+            <img src={logo} className="App-logo" alt="logo" />
+            <br>
+            </br>
             <Typography variant="h4" align="center">
               <div class="htext">
                 Quarantine Purity Test
@@ -527,17 +569,39 @@ class Test extends React.Component {
             </Typography>
             <br></br>
 
-            <Button variant="contained" color="primary" onClick={() => {navigator.clipboard.writeText("https://quarantinepuritytest.com")}}>
-               Copy URL
+            <br></br>
+            <Typography variant="h6" align="center">
+              <div class="htext">
+                Compare with friends!
+                <br></br>
+              </div>
+            </Typography>
+            <br></br>
+
+            <Button variant="contained" color="primary" onClick={() => {navigator.clipboard.writeText("https://quarantinepuritytest.com")}} 
+            endIcon={<PeopleAltIcon />}
+            >
+               Copy URL 
             </Button>
             
             <br></br>
             <br></br>
 
-            <Button variant="contained" color="primary" onClick={this.handleStart}>
-               Retry
+            <Button variant="contained" color="primary" onClick={this.handleStart}
+            endIcon={<ReplayIcon />}>
+               Retry 
             </Button>
             </Paper>
+
+            <Typography variant="body1" gutterBottom>
+                <div class="btext">
+        
+                By <Link href="https://github.com/ashernoel"> Asher Noel  </Link>
+       
+                </div>
+              </Typography>
+
+            
             
           </Box>
         </Container>
