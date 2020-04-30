@@ -28,10 +28,10 @@
   color: #61dafb;
 }
 
-#questionlist li {
-  padding-top: 50px;
-  text-align: left;
+.finalscore {
+  color: red
 }
+
 
 
 
