@@ -27,6 +27,27 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+
+import * as firebase from "firebase";
+import 'firebase/analytics';
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBr-dAZL7SoyzhatzTDfdJvyIOSQtg0uCk",
+    authDomain: "quarantinepuritytest.firebaseapp.com",
+    databaseURL: "https://quarantinepuritytest.firebaseio.com",
+    projectId: "quarantinepuritytest",
+    storageBucket: "quarantinepuritytest.appspot.com",
+    messagingSenderId: "584586267407",
+    appId: "1:584586267407:web:1f2964a04204456d46cc7a",
+    measurementId: "G-DQ8THCWNV0"
+  };
+firebase.initializeApp(firebaseConfig);
+
+var db = firebase.firestore();
+firebase.analytics();
+
+
 
 
 class Test extends React.Component {
@@ -37,11 +58,26 @@ class Test extends React.Component {
     end: false,
   }
 
+  
+
   handleEnd = () => {
     this.setState({
         start: false,
         end: true
     })
+    // Add a new document in collection "scores"
+    
+    var newScoreRef = db.collection("scores").doc();
+    newScoreRef.set({
+        "score": this.state.score,
+    })
+    .then(function() {
+        console.log("Document successfully written!");
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
+
   };
 
   handleStart = () => {
@@ -68,28 +104,6 @@ class Test extends React.Component {
       console.log('I was triggered during render')      
   }
 
-  iosCopyToClipboard(el) {
-    var oldContentEditable = el.contentEditable,
-        oldReadOnly = el.readOnly,
-        range = document.createRange();
-
-    el.contentEditable = true;
-    el.readOnly = false;
-    range.selectNodeContents(el);
-
-    var s = window.getSelection();
-    s.removeAllRanges();
-    s.addRange(range);
-
-    el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
-
-    el.contentEditable = oldContentEditable;
-    el.readOnly = oldReadOnly;
-
-    document.execCommand('copy');
-}
-
-
   render() {
     const {start, end} = this.state;
 
@@ -115,7 +129,7 @@ class Test extends React.Component {
             <Typography variant="body1" gutterBottom>
                 <div class="btext">
                 <br></br>
-                  The official anti-bucket-list of the COVID-19 crisis. 
+                  The official anti-bucket list of the COVID-19 crisis. 
                   <br></br>
                 </div>
               </Typography>
@@ -578,11 +592,13 @@ class Test extends React.Component {
             </Typography>
             <br></br>
 
-            <Button variant="contained" color="primary" onClick={() => {navigator.clipboard.writeText("https://quarantinepuritytest.com")}} 
+            <CopyToClipboard text={"https://quarantinepuritytest.com"}>
+            <Button variant="contained" color="primary"
             endIcon={<PeopleAltIcon />}
             >
                Copy URL 
             </Button>
+            </CopyToClipboard>
             
             <br></br>
             <br></br>
@@ -596,7 +612,7 @@ class Test extends React.Component {
             <Typography variant="body1" gutterBottom>
                 <div class="btext">
         
-                By <Link href="https://github.com/ashernoel"> Asher Noel  </Link>
+                Created by <Link href="https://github.com/ashernoel"> Asher Noel  </Link>
        
                 </div>
               </Typography>
