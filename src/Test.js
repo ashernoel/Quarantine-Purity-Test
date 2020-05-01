@@ -32,16 +32,6 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import * as firebase from "firebase";
 import 'firebase/analytics';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBr-dAZL7SoyzhatzTDfdJvyIOSQtg0uCk",
-    authDomain: "quarantinepuritytest.firebaseapp.com",
-    databaseURL: "https://quarantinepuritytest.firebaseio.com",
-    projectId: "quarantinepuritytest",
-    storageBucket: "quarantinepuritytest.appspot.com",
-    messagingSenderId: "584586267407",
-    appId: "1:584586267407:web:1f2964a04204456d46cc7a",
-    measurementId: "G-DQ8THCWNV0"
-  };
 firebase.initializeApp(firebaseConfig);
 
 var db = firebase.firestore();
